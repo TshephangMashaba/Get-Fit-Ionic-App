@@ -28,43 +28,21 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonButton,
-    IonIcon,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonItem,
-    IonLabel,
-    IonButtons
+  standalone: false,
 
-  ]
 })
-export class HomePage implements OnInit {
-  user: any;
+export class HomePage {
+  username: string | null = null;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-    addIcons({ logOutOutline, personCircleOutline, mailOutline });
+  constructor(private authService: AuthService) {
+    this.loadUser();
   }
 
-  async ngOnInit() {
-    this.user = await this.authService.getCurrentUser();
+  async loadUser() {
+    this.username = await this.authService.getCurrentUser();
   }
 
-  async logout() {
-    await this.authService.logout();
-    this.router.navigate(['/login']);
+  logout() {
+    this.authService.logout();
   }
 }

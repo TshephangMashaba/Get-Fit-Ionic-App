@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
-  standalone: true,
-  imports: [IonHeader, CommonModule,IonToolbar, IonNote,IonicModule, IonItem, IonInput, IonTitle, IonContent, IonLabel, IonButton, IonSpinner,ReactiveFormsModule, FormsModule]  
+  standalone: false
 })
 export class SignupPage {
   signupForm: FormGroup;
@@ -35,7 +34,8 @@ export class SignupPage {
     this.isLoading = true;
   
     try {
-      await this.authService.signup(this.signupForm.value);
+      const { name, password } = this.signupForm.value;
+      await this.authService.signUp(name, password);
       this.router.navigate(['/home']);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';

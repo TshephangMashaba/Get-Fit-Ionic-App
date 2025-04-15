@@ -14,10 +14,10 @@ import { Router, RouterModule } from '@angular/router';
     ReactiveFormsModule,
     IonicModule,
     SignupPageRoutingModule,
-    SignupPage,
     IonicModule.forRoot(),
     RouterModule
   ],
+  declarations: [SignupPage],
 
 })
 export class SignupPageModule {}

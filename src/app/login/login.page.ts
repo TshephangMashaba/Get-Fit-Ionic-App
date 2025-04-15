@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { IonHeader, IonNote, IonToolbar, IonInput } from "@ionic/angular/standalone";
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  imports: [IonicModule] 
+  standalone: false
 })
 export class LoginPage {
   loginForm: FormGroup;
-  isLoading = false;
+  isLoginMode = true;
 
   constructor(
     private fb: FormBuilder,
@@ -22,24 +23,39 @@ export class LoginPage {
     private alertCtrl: AlertController
   ) {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  async login() {
+  async onSubmit() {
     if (this.loginForm.invalid) return;
-    
-    this.isLoading = true;
-    
+
+    const { username, password } = this.loginForm.value;
+
     try {
-      await this.authService.login(this.loginForm.value);
-      this.router.navigate(['/home']);
+      if (this.isLoginMode) {
+        const success = await this.authService.login(username, password);
+        if (success) {
+          this.router.navigate(['/home']);
+        } else {
+          this.showAlert('Login Failed', 'Invalid credentials');
+        }
+      } else {
+        const success = await this.authService.signUp(username, password);
+        if (success) {
+          this.router.navigate(['/home']);
+        } else {
+          this.showAlert('Sign Up Failed', 'Username already exists');
+        }
+      }
     } catch (error) {
-      this.showAlert('Login Failed', (error as Error).message);
-    } finally {
-      this.isLoading = false;
+      this.showAlert('Error', 'An error occurred. Please try again.');
     }
+  }
+
+  toggleMode() {
+    this.isLoginMode = !this.isLoginMode;
   }
 
   private async showAlert(header: string, message: string) {
