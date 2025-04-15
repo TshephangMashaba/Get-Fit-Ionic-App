@@ -3,7 +3,6 @@ import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,30 +17,31 @@ export class AuthService {
     this._storage = await this.storage.create();
   }
 
-  async signUp(username: string, password: string): Promise<boolean> {
+  async signUp(username: string, email: string, password: string): Promise<boolean> {
     const users = await this._storage?.get('users') || [];
-    const userExists = users.some((user: any) => user.username === username);
+    const userExists = users.some((user: any) => user.username === username || user.email === email);
     
     if (userExists) {
       return false;
     }
-    
-    users.push({ username, password });
+
+    users.push({ username, email, password });
     await this._storage?.set('users', users);
     await this._storage?.set('currentUser', username);
     return true;
   }
 
-  async login(username: string, password: string): Promise<boolean> {
+  async login(email: string, password: string): Promise<boolean> {
     const users = await this._storage?.get('users') || [];
-    const user = users.find((u: any) => u.username === username && u.password === password);
-    
+    const user = users.find((u: any) => u.email === email && u.password === password);
+  
     if (user) {
-      await this._storage?.set('currentUser', username);
+      await this._storage?.set('currentUser', user.username);
       return true;
     }
     return false;
   }
+  
 
   async logout() {
     await this._storage?.remove('currentUser');
@@ -53,8 +53,11 @@ export class AuthService {
     return !!username;
   }
 
-  async getCurrentUser(): Promise<string | null> {
-    return await this._storage?.get('currentUser');
-  }
+  async getCurrentUser(): Promise<{ username: string, email: string } | null> {
+    const username = await this._storage?.get('currentUser');
+    const users = await this._storage?.get('users') || [];
 
+    const user = users.find((u: any) => u.username === username);
+    return user ? { username: user.username, email: user.email } : null;
+  }
 }

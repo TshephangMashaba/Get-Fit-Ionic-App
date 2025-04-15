@@ -23,7 +23,8 @@ export class LoginPage {
     private alertCtrl: AlertController
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -31,18 +32,18 @@ export class LoginPage {
   async onSubmit() {
     if (this.loginForm.invalid) return;
 
-    const { username, password } = this.loginForm.value;
+    const { username, email, password } = this.loginForm.value;
 
     try {
       if (this.isLoginMode) {
-        const success = await this.authService.login(username, password);
+        const success = await this.authService.login(email, password);
         if (success) {
           this.router.navigate(['/home']);
         } else {
           this.showAlert('Login Failed', 'Invalid credentials');
         }
       } else {
-        const success = await this.authService.signUp(username, password);
+        const success = await this.authService.signUp(username, email, password);
         if (success) {
           this.router.navigate(['/home']);
         } else {
@@ -56,6 +57,15 @@ export class LoginPage {
 
   toggleMode() {
     this.isLoginMode = !this.isLoginMode;
+  
+    if (this.isLoginMode) {
+      this.loginForm.removeControl('username');
+    } else {
+      this.loginForm.addControl(
+        'username',
+        this.fb.control('', [Validators.required, Validators.minLength(3)])
+      );
+    }
   }
 
   private async showAlert(header: string, message: string) {

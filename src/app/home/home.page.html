@@ -1,6 +1,5 @@
-<!-- src/app/home/home.page.html -->
-<ion-header>
-  <ion-toolbar>
+<ion-header color="success">
+  <ion-toolbar color="success">
     <ion-title>Home</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()">
@@ -10,13 +9,87 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <ion-card *ngIf="username">
-    <ion-card-header>
-      <ion-card-title>Welcome, {{ username }}!</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      You're successfully logged in using Ionic Storage.
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+<ion-tabs>
+ 
+  <!-- Tab content -->
+  <ion-tab tab="home">
+    <ion-content class="ion-padding">
+    
+      <br>
+      <br>
+      <br>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Welcome, {{ username }}!</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Welcome to GetFit! Here you can track your workout progress.
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Motivational Quote -->
+      <ion-card color="success" class="quote-card">
+        <ion-card-content class="ion-text-center">
+          <em>"The only bad workout is the one you didn't do."</em><br />
+          <small> Keep pushing, {{ username }}!</small>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Workout Programs -->
+      <ion-grid>
+        <ion-row>
+          <!-- Full Body Workout -->
+          <ion-col size="12" size-md="4">
+            <ion-card class="program-card" routerLink="/program-details/1" button>
+              <ion-img src="/assets/full-body-workout.jpg" alt="Full Body Workout"></ion-img>
+              <ion-card-header>
+                <ion-card-title>Full Body Workout</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+
+          <!-- Cardio Burn -->
+          <ion-col size="12" size-md="4">
+            <ion-card class="program-card" routerLink="/program-details/2" button>
+              <ion-img src="/assets/cardio-burn.jpg" alt="Cardio Burn"></ion-img>
+              <ion-card-header>
+                <ion-card-title>Cardio Burn</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+
+          <!-- Core Strength -->
+          <ion-col size="12" size-md="4">
+            <ion-card class="program-card" routerLink="/program-details/3" button>
+              <ion-img src="/assets/core-strength.jpg" alt="Core Strength"></ion-img>
+              <ion-card-header>
+                <ion-card-title>Core Strength</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ion-tab>
+
+  <!-- Tab bar -->
+  <ion-tab-bar slot="bottom" color="success" class="custom-tab-bar">
+    <!-- Home Tab -->
+    <ion-tab-button tab="home" href="/home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <!-- Workouts Tab -->
+    <ion-tab-button tab="workouts" href="/workouts">
+      <ion-icon name="fitness"></ion-icon>
+      <ion-label>Workouts</ion-label>
+    </ion-tab-button>
+
+    <!-- Progress Tab -->
+    <ion-tab-button tab="progress" href="/progress/1">
+      <ion-icon name="bar-chart"></ion-icon>
+      <ion-label>Progress</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

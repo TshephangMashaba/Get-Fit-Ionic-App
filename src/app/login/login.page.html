@@ -1,33 +1,52 @@
-<!-- src/app/login/login.page.html -->
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-title>{{ isLoginMode ? 'Login' : 'Sign Up' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input formControlName="username" type="text"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-      Username must be at least 3 characters
-    </ion-note>
+<ion-content class="ion-padding" color="light">
+  <div class="logo-container">
+    <img src="/assets/GetFitLogo.png" alt="App Logo" class="logo">
+    <h2 class="app-name">Welcome to GetFit</h2>
+  </div>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-    <ion-note color="danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-      Password must be at least 6 characters
-    </ion-note>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
+    <ion-list lines="none">
+      <!-- Username Field - Only for Sign Up -->
+<ion-item *ngIf="!isLoginMode" class="ion-margin-bottom" [class.invalid]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+  <ion-label position="floating">Username</ion-label>
+  <ion-input formControlName="username" type="text"></ion-input>
+</ion-item>
+<ion-note color="danger" *ngIf="!isLoginMode && loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-note">
+  Username must be at least 3 characters
+</ion-note>
 
-    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top">
+
+      <!-- Email Field -->
+      <ion-item class="ion-margin-bottom" [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-note">
+        Please enter a valid email address
+      </ion-note>
+
+      <!-- Password Field -->
+      <ion-item class="ion-margin-bottom" [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-note">
+        Password must be at least 6 characters
+      </ion-note>
+
+    </ion-list>
+
+    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid" class="ion-margin-top" color="success" shape="round">
       {{ isLoginMode ? 'Login' : 'Sign Up' }}
     </ion-button>
 
-    <ion-button expand="block" fill="clear" (click)="toggleMode()" class="ion-margin-top">
+    <ion-button expand="block" fill="clear" (click)="toggleMode()" class="ion-margin-top" color="medium">
       {{ isLoginMode ? 'Need an account? Sign Up' : 'Already have an account? Login' }}
     </ion-button>
   </form>

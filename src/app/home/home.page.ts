@@ -39,7 +39,8 @@ export class HomePage {
   }
 
   async loadUser() {
-    this.username = await this.authService.getCurrentUser();
+    const user = await this.authService.getCurrentUser();
+    this.username = user ? user.username : null;
   }
 
   logout() {
