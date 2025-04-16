@@ -1,0 +1,92 @@
+<ion-header color="success">
+  <ion-toolbar color="success">
+    <ion-title >Workout Programs</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="intro-card" color="success" >
+    <ion-card-content>
+      <ion-text color="light">
+        <h1 class="ion-text-center">Choose Your Program</h1>
+        <p class="ion-text-center">From explosive agility to muscle recovery <br> — pick your next challenge.</p>
+        <br>
+        <br>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-grid>
+    <ion-row>
+
+      <!-- Agility Boost -->
+      <ion-col size="12" size-md="6">
+        <ion-card routerLink="/program-details/1" button color="primary">
+          <ion-img src="/assets/agility-boost.jpg" alt="Agility Boost"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="text-color">Agility Boost</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="text-color">
+            Improve speed, coordination, and quick reflexes with high-speed drills and plyometrics.
+            <br><strong>Duration:</strong> 25 mins | <strong>Level:</strong> Intermediate
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Recovery Flow -->
+      <ion-col size="12" size-md="6">
+        <ion-card routerLink="/program-details/2" button color="danger">
+          <ion-img src="/assets/recovery-flow.jpg" alt="Recovery Flow"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="text-color">Recovery Flow</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="text-color">
+            Designed to aid muscle recovery with deep stretching, foam rolling, and breathwork.
+            <br><strong>Duration:</strong> 30 mins | <strong>Level:</strong> All Levels
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Beast Mode Upper Body -->
+      <ion-col size="12" size-md="6">
+        <ion-card routerLink="/program-details/3" button color="warning">
+          <ion-img src="/assets/beast-mode-upper.jpg" alt="Beast Mode Upper Body"></ion-img>
+          <ion-card-header>
+            <ion-card-title class="text-color">Beast Mode: Upper Body</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="text-color">
+            Build strength and mass in your chest, shoulders, back, and arms. Go heavy, go hard.
+            <br><strong>Duration:</strong> 45 mins | <strong>Level:</strong> Advanced
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+  <!-- Tab bar -->
+  <ion-tab-bar slot="bottom" color="success" class="custom-tab-bar">
+    <!-- Home Tab -->
+    <ion-tab-button tab="home" routerLink="/home">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+
+    <!-- Workouts Tab -->
+    <ion-tab-button tab="workouts" routerLink="/program-listing">
+      <ion-icon name="fitness"></ion-icon>
+      <ion-label>Workouts</ion-label>
+    </ion-tab-button>
+
+    <!-- Progress Tab -->
+    <ion-tab-button tab="progress" href="/progress/1">
+      <ion-icon name="bar-chart"></ion-icon>
+      <ion-label>Progress</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
