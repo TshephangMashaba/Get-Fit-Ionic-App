@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Workout Progress</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-title style="color:white">Agility Boost</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="card-row">
+        <ion-col size="4" class="image-col">
+          <img src="assets/agility-boost.jpg" alt="Agility Boost" class="card-image">
+        </ion-col>
+        <ion-col size="8" class="text-col">
+          <p style="color:white">Status:
+            <strong *ngIf="agilityBoostCompleted; else notDone">✅ Completed</strong>
+            <ng-template #notDone><strong>❌ Incomplete</strong></ng-template>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="warning">
+    <ion-card-header>
+      <ion-card-title>Beast Mode</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="card-row">
+        <ion-col size="4" class="image-col">
+          <img src="assets/beast-mode-upper.jpg" alt="Beast Mode" class="card-image">
+        </ion-col>
+        <ion-col size="8" class="text-col">
+          <p >Status:
+            <strong *ngIf="beastModeCompleted; else notDone">✅ Completed</strong>
+            <ng-template #notDone><strong>❌ Incomplete</strong></ng-template>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="danger">
+    <ion-card-header>
+      <ion-card-title style="color:white">Recovery Flow</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row class="card-row">
+        <ion-col size="4" class="image-col">
+          <img src="assets/recovery-flow.jpg" alt="Recovery Flow" class="card-image">
+        </ion-col>
+        <ion-col size="8" class="text-col">
+          <p style="color:white">Status:
+            <strong *ngIf="recoveryFlowCompleted; else notDone">✅ Completed</strong>
+            <ng-template #notDone><strong>❌ Incomplete</strong></ng-template>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<!-- Tab bar -->
+<ion-tab-bar slot="bottom" color="success" class="custom-tab-bar">
+  <ion-tab-button tab="home" routerLink="/home">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="workouts" routerLink="/program-listing">
+    <ion-icon name="fitness"></ion-icon>
+    <ion-label>Workouts</ion-label>
+  </ion-tab-button>
+
+  <ion-tab-button tab="progress" routerLink="/workout-progress-page">
+    <ion-icon name="bar-chart"></ion-icon>
+    <ion-label>Progress</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>
+
+

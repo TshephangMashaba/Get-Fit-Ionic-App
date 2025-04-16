@@ -1,0 +1,10 @@
+ion-card {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+  }
+  
+  
+  ion-card-content {
+    flex-grow: 1;
+  }

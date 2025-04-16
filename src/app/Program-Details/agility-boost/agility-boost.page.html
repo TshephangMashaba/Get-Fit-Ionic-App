@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Agility-Boost</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Agility-Boost</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card routerLink="/agility-boost" button color="primary">
+    <ion-img src="/assets/agility-boost.jpg" alt="Agility Boost"></ion-img>
+    <ion-card-header>
+      <ion-card-title class="text-color">Agility Boost</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="text-color">
+      Improve speed, coordination, and quick reflexes with high-speed drills and plyometrics.
+      <br><strong>Duration:</strong> 25 mins | <strong>Level:</strong> Intermediate
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
+<ion-button 
+  expand="block" 
+  color="success" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn"
+  (click)="markAsCompleted()">
+Mark as Completed
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="danger" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/home">
+  Back to Home
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="warning" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/agility-boost-status">
+  View Progress
+</ion-button>

@@ -1,0 +1,53 @@
+import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { Storage } from '@ionic/storage-angular';
+
+@Component({
+  selector: 'app-agility-boost',
+  templateUrl: './agility-boost.page.html',
+  styleUrls: ['./agility-boost.page.scss'],
+  standalone: false
+})
+export class AgilityBoostPage implements OnInit {
+  private _storage: Storage | null = null;
+
+  constructor(
+    private storage: Storage,
+    private authService: AuthService,
+    private alertCtrl: AlertController
+  ) {}
+
+  async ngOnInit() {
+    this._storage = await this.storage.create();
+  }
+
+  async markAsCompleted() {
+    const currentUser = await this.authService.getCurrentUser();
+    if (!currentUser) {
+      this.showAlert('Not Logged In', 'Please log in to track your progress.');
+      return;
+    }
+
+    const username = currentUser.username;
+    const key = `completedPrograms_${username}`;
+
+    const existing = (await this._storage?.get(key)) || [];
+
+    if (!existing.includes('agility-boost')) {
+      existing.push('agility-boost');
+      await this._storage?.set(key, existing);
+    }
+
+    this.showAlert('Success', 'Agility Boost marked as completed!');
+  }
+
+  private async showAlert(header: string, message: string) {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+}

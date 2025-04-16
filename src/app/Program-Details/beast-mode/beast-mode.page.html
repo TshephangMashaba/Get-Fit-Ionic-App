@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Beast-Mode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Beast-Mode</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card routerLink="/beast-mode" button color="primary">
+    <ion-img src="/assets/beast-mode-upper.jpg" alt="Beast Mode"></ion-img>
+    <ion-card-header>
+      <ion-card-title class="text-color">Beast Mode</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="text-color">
+      Unlock your inner beast with powerful strength-building workouts and endurance training. 
+      <br><strong>Duration:</strong> 30 mins | <strong>Level:</strong> Advanced
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-button 
+  expand="block" 
+  color="success" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn"
+  (click)="markAsCompleted()">
+  Mark as Completed
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="danger" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/home">
+  Back to Home
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="warning" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/beast-mode-status">
+  View Progress
+</ion-button>

@@ -1,0 +1,14 @@
+ion-card {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+  }
+  
+  ion-img {
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  ion-card-content {
+    flex-grow: 1;
+  }

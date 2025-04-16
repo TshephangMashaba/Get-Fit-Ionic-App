@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recovery Flow</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Recovery Flow</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card routerLink="/recovery-flow" button color="primary">
+    <ion-img src="/assets/recovery-flow.jpg" alt="Reovery Flow"></ion-img>
+    <ion-card-header>
+      <ion-card-title class="text-color">Recovery Flow</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="text-color">
+      Designed to aid muscle recovery with deep stretching, foam rolling, and breathwork.
+      <br><strong>Duration:</strong> 30 mins | <strong>Level:</strong> All Levels
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
+<ion-button 
+  expand="block" 
+  color="success" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn"
+  (click)="markAsCompleted()">
+Mark as Completed
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="danger" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/home">
+  Back to Home
+</ion-button>
+
+<ion-button 
+  type="button" 
+  expand="block" 
+  color="warning" 
+  shape="round" 
+  class="ion-margin-bottom custom-btn" 
+  routerLink="/recovery-flow-status">
+  View Progress
+</ion-button>
